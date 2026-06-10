@@ -102,8 +102,10 @@ The gateway initializes a local database file payments.db and binds to: http://1
 }
 ```
 -------------------------------------------------
-🔍 Triage, Logging, and Error Governance
-The engine isolates system exceptions from customer-facing API responses. Low-level database faults and infrastructure crashes are captured, bound to the transaction's X-Request-ID (Correlation ID) inside internal logs, and safely abstracted to comply with PCI-DSS guidelines.
+
+## 🔍 Triage, Logging, and Error Governance
+
+The engine isolates system exceptions from customer-facing API responses. Low-level database faults and infrastructure crashes are captured, bound to the transaction's `X-Request-ID` (Correlation ID) inside internal logs, and safely abstracted to comply with PCI-DSS guidelines.
 
 API Error Mapping Matrix
 | HTTP Status | Error Context | Core Trigger Condition / Log Signal | Client-Facing Message |
@@ -114,8 +116,8 @@ API Error Mapping Matrix
 | **`503 Service Unavailable`** | Infrastructure Timeout | `OperationalError` triggered via backend database lock/unresponsiveness. | *Service Unavailable: Database infrastructure issue* |
 
 
-📈 Engineering Roadmap
-	1.	Tokenization Vault (PCI-DSS): Decouple raw cardholder details into placeholder tokens using asymmetric encryption keys.
-	2.	Asynchronous Batch Settlement: Implement background workers to group Captured states into clearing batches for automated bank processing files.
-	3.	Dynamic Routing: Add backup acquirer profiles to automatically route transactions if primary processing endpoints trigger mock 503 errors.
+## 📈 Engineering Roadmap
 
+1. **Tokenization Vault (PCI-DSS):** Decouple raw cardholder details into placeholder tokens using asymmetric encryption keys.
+2. **Asynchronous Batch Settlement:** Implement background workers to group `Captured` states into clearing batches for automated bank processing files.
+3. **Dynamic Routing:** Add backup acquirer profiles to automatically route transactions if primary processing endpoints trigger mock `503` errors.
