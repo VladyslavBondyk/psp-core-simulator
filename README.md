@@ -46,15 +46,17 @@ uvicorn main:app --reload
 
 The gateway initializes a local database file payments.db and binds to: http://127.0.0.1:8000
 
-🔌 Core API Specifications
-1. Authorize Payment
-•	Method: POST
-•	Path: /api/v1/payments/authorize
-•	Headers:
-•	X-API-Key: sk_test_12345abcde (Required)
-•	Idempotency-Key: unique-uuid-string-12345 (Recommended)
-•	Content-Type: application/json
-•	Request Payload (JSON Body):
+## 🔌 Core API Specifications
+
+### 1. Authorize Payment
+* **Method:** `POST`
+* **Path:** `/api/v1/payments/authorize`
+* **Headers:**
+    * `X-API-Key`: `sk_test_12345abcde` *(Required)*
+    * `Idempotency-Key`: `unique-uuid-string-12345` *(Recommended)*
+    * `Content-Type`: `application/json`
+
+* **Request Payload (JSON Body):**
 ```json
 {
   "merchant_id": "WRO_paytech",
@@ -74,12 +76,14 @@ The gateway initializes a local database file payments.db and binds to: http://1
   "redirect_url": null
 }
 ```
-2. Get Payment Status (Polling/Inspection)
-•	Method: GET
-•	Path: /api/v1/payments/{transaction_id}
-•	Headers:
-•	X-API-Key: sk_test_12345abcde
-•	Response Payload (200 OK):
+
+### 2. Get Payment Status (Polling/Inspection)
+* **Method:** `GET`
+* **Path:** `/api/v1/payments/{transaction_id}`
+* **Headers:**
+    * `X-API-Key`: `sk_test_12345abcde` *(Required)*
+
+* **Response Payload (`200 OK`):**
 ```json
 {
   "transaction_id": "49488f32-fa41-4590-9ff1-3f3106878c4c",
@@ -91,10 +95,10 @@ The gateway initializes a local database file payments.db and binds to: http://1
 }
 ```
 
-3. Capture Payment (Settlement Trigger)
-•	Method: POST
-•	Path: /api/v1/payments/{transaction_id}/capture
-•	Response Payload (200 OK):
+### 3. Capture Payment (Settlement Trigger)
+* **Method:** `POST`
+* **Path:** `/api/v1/payments/{transaction_id}/capture`
+* **Response Payload (`200 OK`):**
 ```json
 {
   "transaction_id": "49488f32-fa41-4590-9ff1-3f3106878c4c",
