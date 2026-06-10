@@ -106,11 +106,12 @@ The gateway initializes a local database file payments.db and binds to: http://1
 The engine isolates system exceptions from customer-facing API responses. Low-level database faults and infrastructure crashes are captured, bound to the transaction's X-Request-ID (Correlation ID) inside internal logs, and safely abstracted to comply with PCI-DSS guidelines.
 
 API Error Mapping Matrix
-HTTP Status	Error Context	Core Trigger Condition / Log Signal	Client-Facing Message
-400 Bad Request	Data Conflict / Schema Breach	IntegrityError or missing structural fields (e.g., card_holder).	Transaction conflict: Idempotency or Unique constraint violation
-401 Unauthorized	Key/Signature Invalidation	Rogue header input or mismatched HMAC signature during webhook delivery.	Unauthorized: Invalid API Key / Webhook signature
-429 Too Many Requests	Velocity Breach	Rate-limiter cache exceeds 10 requests per window from a single API key.	Too Many Requests: Rate limit exceeded
-503 Service Unavailable	Infrastructure Timeout	OperationalError triggered via backend database lock/unresponsiveness.	Service Unavailable: Database infrastructure issue
+| HTTP Status | Error Context | Core Trigger Condition / Log Signal | Client-Facing Message |
+| :--- | :--- | :--- | :--- |
+| **`400 Bad Request`** | Data Conflict / Schema Breach | `IntegrityError` or missing structural fields (e.g., `card_holder`). | *Transaction conflict: Idempotency or Unique constraint violation* |
+| **`401 Unauthorized`** | Key/Signature Invalidation | Rogue header input or mismatched HMAC signature during webhook delivery. | *Unauthorized: Invalid API Key / Webhook signature* |
+| **`429 Too Many Requests`** | Velocity Breach | Rate-limiter cache exceeds `10` requests per window from a single API key. | *Too Many Requests: Rate limit exceeded* |
+| **`503 Service Unavailable`** | Infrastructure Timeout | `OperationalError` triggered via backend database lock/unresponsiveness. | *Service Unavailable: Database infrastructure issue* |
 
 
 📈 Engineering Roadmap
