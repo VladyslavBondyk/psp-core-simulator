@@ -1,4 +1,4 @@
-# Fintech Core API Simulator (PSP Engine)
+# Fintech Core API Simulator (PSP Engine) 
 
 A production-ready, high-performance Payment Service Provider (PSP) gateway simulator built with Python and FastAPI. This engine demonstrates industry-standard transaction processing lifecycles, rigorous server-to-server security protocols, robust error triage, and strict schema validation.
 
